@@ -5,6 +5,8 @@
  */
 package spaceinvaders;
 
+import java.util.concurrent.Executors;
+
 /**
  *
  * @author drumm
@@ -13,27 +15,32 @@ public class NewJFrame extends javax.swing.JFrame {
 
     public static final double STEP = 20.0;
     public static final double TANK_XMIN = 8.0;
-    public static final double TANK_XMAX = 568.0;
+    public static final double TANK_XMAX = 550.0;
     public static final double ALIEN_XMIN = TANK_XMIN;
     public static final double ALIEN_XMAX = TANK_XMAX;
     public static final double ROCKET_YMIN = 270.0;
     public static final double ROCKET_YMAX = 8.0;
-    
+
     CollezioneElementi coll;
     Tank tank;
+
     /**
      * Creates new form NewJFrame
      */
     public NewJFrame() {
         initComponents();
-        
-        setSize(800, 600);
-        coll = new CollezioneElementi();
-        coll.add(new Alien(50, jButtonAlien1));
-        coll.add(new Alien(100, jButtonAlien2));
-        coll.add(new Alien(150, jButtonAlien3));
-        tank = new Tank(jButtonTank);
-        coll.add(tank);
+
+        setSize(600, 600);
+//        coll = new CollezioneElementi();
+//        coll.add(new Alien(50, jButtonAlien1));
+//        coll.add(new Alien(100, jButtonAlien2));
+//        coll.add(new Alien(150, jButtonAlien3));
+//        tank = new Tank(jButtonTank);
+//        coll.add(tank);
+        var exe = Executors.newCachedThreadPool();
+        exe.execute(new AlienThread(jButtonAlien1, jButtonAlien2, jButtonAlien3));
+        exe.execute(new RocketThread());
+        exe.execute(new TankThread());
     }
 
     /**
@@ -146,11 +153,11 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAlien3ActionPerformed
 
     private void jButtonLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeftActionPerformed
-        tank.setTargetX(tank.getTargetX()- STEP);
+        tank.setTargetX(tank.getTargetX() - STEP);
     }//GEN-LAST:event_jButtonLeftActionPerformed
 
     private void jButtonRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRightActionPerformed
-        tank.setTargetX(tank.getTargetX()+ STEP);
+        tank.setTargetX(tank.getTargetX() + STEP);
     }//GEN-LAST:event_jButtonRightActionPerformed
 
     /**

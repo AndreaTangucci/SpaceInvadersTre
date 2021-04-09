@@ -33,5 +33,21 @@ public class Alien extends ElementoDiGioco{
         }
         // inverto lo step (i.e. rimbalzo)
         setStepX(-getStepX());
+        System.out.println("Fine raggiunto target");
+    }
+    
+    @Override
+    public void move(){
+        setX(getX() + getStepX());
+        if (getX() == NewJFrame.ALIEN_XMAX) {
+            setStepX(-getStepX());
+            setTargetX(NewJFrame.ALIEN_XMIN);
+        } else if (getX() == NewJFrame.ALIEN_XMIN){
+            System.out.println("else if");
+            setX(getX() - getStepX());
+            setTargetX(NewJFrame.ALIEN_XMAX);
+            setStepX(+getStepX());
+        }
+        
     }
 }
