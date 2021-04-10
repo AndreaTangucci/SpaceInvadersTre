@@ -2,7 +2,8 @@ package spaceinvaders;
 
 import javax.swing.JButton;
 
-public class Rocket extends ElementoDiGioco{
+public class Rocket extends ElementoDiGioco {
+
     public Rocket(double x, JButton b) {
         setButton(b);
         getButton().setVisible(true);
@@ -22,7 +23,7 @@ public class Rocket extends ElementoDiGioco{
         if (getY() == NewJFrame.ROCKET_YMAX) {
             // lo nasconde ...
             getButton().setVisible(false);
-            
+
             // lo ferma
             setStepX(0);
             setStepY(0);
@@ -33,19 +34,19 @@ public class Rocket extends ElementoDiGioco{
 
     @Override
     public void move() {
-        setY(getY() + getStepY());
-        System.out.println("velocita: " + getY());
+        //System.out.println("velocita: " + getY());
+        
         if (getY() == NewJFrame.ROCKET_YMAX) {
-            // lo nasconde ...
+            //setStepX(-getStepX());
             getButton().setVisible(false);
-            
-            // lo ferma
+             // lo ferma
             setStepX(0);
             setStepY(0);
         } else {
+            //setTargetY(NewJFrame.ROCKET_YMIN);
             setTargetX(NewJFrame.ROCKET_YMIN);
+            setY(getY() + getStepY());
         }
     }
-    
-    
+
 }

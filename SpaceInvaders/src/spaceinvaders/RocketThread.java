@@ -4,11 +4,15 @@ import javax.swing.JButton;
 
 public class RocketThread implements Runnable{
     
-    private JButton jButtonRocket;
+    private final JButton jButtonRocket;
     private Rocket rocket;
     private double x;
     private double y;
     private boolean buttonPress = false;
+    
+    public RocketThread(JButton jButtonRocket) {
+        this.jButtonRocket = jButtonRocket;
+    }
 
     public boolean isButtonPress() {
         return buttonPress;
@@ -40,22 +44,30 @@ public class RocketThread implements Runnable{
 
     public void setX(double x) {
         this.x = x;
-    }
-
-    public RocketThread(JButton jButtonRocket) {
-        this.jButtonRocket = jButtonRocket;
+        if (rocket != null){
+            rocket.setX(x);
+        }
     }
 
     @Override
     public void run() {
-        //creo rocket
+        //creo rocket invisibile
+        System.out.println("x in Run RocketThread: " + x);
         rocket = new Rocket(x, jButtonRocket);
-        rocket.setY(y);
+        rocket.getButton().setVisible(false);
+        //rocket.setY(y);
         while(true){
             //muovo rocket
+            //rocket.move();
             if (buttonPress == true){
+                rocket.getButton().setVisible(true);
+                //rocket.setTargetY(rocket.getTargetY() - NewJFrame.STEP);
                 rocket.move();
-                buttonPress = false;
+            }
+            try {
+                //aspetto 200ms
+                Thread.sleep(2);
+            } catch (InterruptedException ex) {
             }
         }
     }

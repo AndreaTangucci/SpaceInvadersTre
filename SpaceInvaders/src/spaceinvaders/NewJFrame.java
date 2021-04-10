@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package spaceinvaders;
 
 import java.util.concurrent.Executors;
@@ -21,11 +16,9 @@ public class NewJFrame extends javax.swing.JFrame {
     public static final double ROCKET_YMIN = 270.0;
     public static final double ROCKET_YMAX = 8.0;
 
-    CollezioneElementi coll;
-    Tank tank;
     TankThread tankThread;
-    Rocket rocket;
     RocketThread rocketThread;
+    AlienThread alienThread;
 
     /**
      * Creates new form NewJFrame
@@ -34,19 +27,13 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
 
         setSize(600, 600);
-//        coll = new CollezioneElementi();
-//        coll.add(new Alien(50, jButtonAlien1));
-//        coll.add(new Alien(100, jButtonAlien2));
-//        coll.add(new Alien(150, jButtonAlien3));
-//        tank = new Tank(jButtonTank);
-//        coll.add(tank);
         tankThread = new TankThread(jButtonTank);
         rocketThread = new RocketThread(jButtonRocket);
-        AlienThread alienThread = new AlienThread(jButtonAlien1, jButtonAlien2, jButtonAlien3);
+        alienThread = new AlienThread(jButtonAlien1, jButtonAlien2, jButtonAlien3);
         var exe = Executors.newCachedThreadPool();
         exe.execute(alienThread);
-        exe.execute(rocketThread);
         exe.execute(tankThread);
+        exe.execute(rocketThread);  
     }
 
     /**
@@ -174,12 +161,14 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRightActionPerformed
 
     private void jButtonFireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFireActionPerformed
-        rocketThread.getRocket().getButton().setVisible(true);
-        rocketThread.setX(tankThread.tank.getX());
-        rocketThread.setY(tankThread.tank.getY());
-        System.out.println("tank Y: " + tankThread.tank.getY());
-        System.out.println("tank X: " + tankThread.tank.getX());
         rocketThread.setButtonPress(true);
+        //rocketThread.getRocket().getButton().setVisible(true);
+        rocketThread.setX(tankThread.getTank().getX());
+        rocketThread.setY(tankThread.getTank().getY());
+        System.out.println("FIRE rocket Y: " + rocketThread.getRocket().getY());
+        System.out.println("FIRE rocket X: " + rocketThread.getRocket().getX());
+        System.out.println("FIRE tank X: " + tankThread.getTank().getX());
+        
     }//GEN-LAST:event_jButtonFireActionPerformed
 
     /**
