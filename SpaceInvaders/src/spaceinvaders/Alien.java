@@ -44,10 +44,8 @@ public class Alien extends ElementoDiGioco{
             setTargetX(NewJFrame.ALIEN_XMIN);
         } else if (getX() == NewJFrame.ALIEN_XMIN){
             System.out.println("else if");
-            setX(getX() - getStepX());
             setTargetX(NewJFrame.ALIEN_XMAX);
-            setStepX(+getStepX());
+            setStepX(-getStepX());
         }
-        
     }
 }

@@ -35,4 +35,17 @@ public class CollezioneElementi {
             }
         }
     }
+    
+    public synchronized void manageElement() {
+        lista.stream().forEach(e -> {
+            if (e.hasToMove()) {
+                e.move();
+            } else {
+                e.raggiuntoTarget();
+                if (e.hasToMove()) {
+                    e.move();
+                }
+            }
+        });
+    }
 }

@@ -18,15 +18,26 @@ public class Tank extends ElementoDiGioco {
     public void move() {
         // se devo andare a destra ...
         if (getTargetX() > getX()) {
+            if (getX() >= NewJFrame.TANK_XMAX) {
+                setStepX(-1);
+            } else {
+                setStepX(1);
+            }
             // ... imposto step a +1
-            setStepX(1);
+
         } else {
+            if (getX() <= NewJFrame.TANK_XMIN) {
+                setStepX(1);
+            } else {
+                setStepX(-1);
+            }
             // ... altrimenti a -1 (i.e. vado a sinistra)
-            setStepX(-1);
+
         }
         // mi muovo
         setX(getX() + getStepX());
         setY(getY() + getStepY());
+
     }
 
 }

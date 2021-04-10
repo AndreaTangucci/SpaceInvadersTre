@@ -23,6 +23,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
     CollezioneElementi coll;
     Tank tank;
+    TankThread tankThread;
+    Rocket rocket;
+    RocketThread rocketThread;
 
     /**
      * Creates new form NewJFrame
@@ -37,10 +40,13 @@ public class NewJFrame extends javax.swing.JFrame {
 //        coll.add(new Alien(150, jButtonAlien3));
 //        tank = new Tank(jButtonTank);
 //        coll.add(tank);
+        tankThread = new TankThread(jButtonTank);
+        rocketThread = new RocketThread(jButtonRocket);
+        AlienThread alienThread = new AlienThread(jButtonAlien1, jButtonAlien2, jButtonAlien3);
         var exe = Executors.newCachedThreadPool();
-        exe.execute(new AlienThread(jButtonAlien1, jButtonAlien2, jButtonAlien3));
-        exe.execute(new RocketThread());
-        exe.execute(new TankThread());
+        exe.execute(alienThread);
+        exe.execute(rocketThread);
+        exe.execute(tankThread);
     }
 
     /**
@@ -96,6 +102,11 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jButtonFire.setText("Fire!!");
+        jButtonFire.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFireActionPerformed(evt);
+            }
+        });
 
         jButtonRocket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/spaceinvaders/rocket.png"))); // NOI18N
 
@@ -153,12 +164,23 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAlien3ActionPerformed
 
     private void jButtonLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeftActionPerformed
-        tank.setTargetX(tank.getTargetX() - STEP);
+        tankThread.setStep(-1);
+        tankThread.setButtonPress(true);
     }//GEN-LAST:event_jButtonLeftActionPerformed
 
     private void jButtonRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRightActionPerformed
-        tank.setTargetX(tank.getTargetX() + STEP);
+        tankThread.setStep(+1);
+        tankThread.setButtonPress(true);
     }//GEN-LAST:event_jButtonRightActionPerformed
+
+    private void jButtonFireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFireActionPerformed
+        rocketThread.getRocket().getButton().setVisible(true);
+        rocketThread.setX(tankThread.tank.getX());
+        rocketThread.setY(tankThread.tank.getY());
+        System.out.println("tank Y: " + tankThread.tank.getY());
+        System.out.println("tank X: " + tankThread.tank.getX());
+        rocketThread.setButtonPress(true);
+    }//GEN-LAST:event_jButtonFireActionPerformed
 
     /**
      * @param args the command line arguments
