@@ -50,6 +50,11 @@ public class TankThread implements Runnable{
                 //System.out.println("valore targetX: " + tank.getTargetX());
                 buttonPress = false;
             }
+            try {
+                //aspetto 200ms
+                Thread.sleep(2);
+            } catch (InterruptedException ex) {
+            }
         }
     }
 

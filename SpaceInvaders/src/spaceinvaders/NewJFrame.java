@@ -162,13 +162,12 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButtonFireActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFireActionPerformed
         rocketThread.setButtonPress(true);
-        //rocketThread.getRocket().getButton().setVisible(true);
-        rocketThread.setX(tankThread.getTank().getX());
-        rocketThread.setY(tankThread.getTank().getY());
-        System.out.println("FIRE rocket Y: " + rocketThread.getRocket().getY());
+        rocketThread.getRocket().getButton().setVisible(true);
+        rocketThread.getRocket().setX(tankThread.getTank().getX());
+        rocketThread.getRocket().setY(tankThread.getTank().getY());
         System.out.println("FIRE rocket X: " + rocketThread.getRocket().getX());
-        System.out.println("FIRE tank X: " + tankThread.getTank().getX());
-        
+        System.out.println("FIRE rocket button visible: " 
+                + rocketThread.getRocket().getButton().isVisible());
     }//GEN-LAST:event_jButtonFireActionPerformed
 
     /**

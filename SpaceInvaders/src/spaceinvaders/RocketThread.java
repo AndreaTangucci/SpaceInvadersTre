@@ -8,18 +8,18 @@ public class RocketThread implements Runnable{
     private Rocket rocket;
     private double x;
     private double y;
-    private boolean buttonPress = false;
+   // private boolean buttonPress = false;
     
     public RocketThread(JButton jButtonRocket) {
         this.jButtonRocket = jButtonRocket;
     }
 
     public boolean isButtonPress() {
-        return buttonPress;
+        return rocket.isButtonPressed();
     }
 
     public void setButtonPress(boolean buttonPress) {
-        this.buttonPress = buttonPress;
+        rocket.setButtonPressed(buttonPress);
     }
 
     public Rocket getRocket() {
@@ -59,7 +59,7 @@ public class RocketThread implements Runnable{
         while(true){
             //muovo rocket
             //rocket.move();
-            if (buttonPress == true){
+            if (rocket.isButtonPressed()){
                 rocket.getButton().setVisible(true);
                 //rocket.setTargetY(rocket.getTargetY() - NewJFrame.STEP);
                 rocket.move();
