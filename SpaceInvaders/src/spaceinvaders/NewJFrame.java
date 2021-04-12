@@ -151,12 +151,14 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAlien3ActionPerformed
 
     private void jButtonLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeftActionPerformed
-        tankThread.setStep(-1);
+        tankThread.getTank().setStepX(-1);
+        tankThread.getTank().setTargetX(tankThread.getTank().getX() - 10);
         tankThread.setButtonPress(true);
     }//GEN-LAST:event_jButtonLeftActionPerformed
 
     private void jButtonRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRightActionPerformed
-        tankThread.setStep(+1);
+        tankThread.getTank().setStepX(+1);
+        tankThread.getTank().setTargetX(tankThread.getTank().getX() + 10);
         tankThread.setButtonPress(true);
     }//GEN-LAST:event_jButtonRightActionPerformed
 
@@ -164,6 +166,7 @@ public class NewJFrame extends javax.swing.JFrame {
         rocketThread.setButtonPress(true);
         rocketThread.getRocket().getButton().setVisible(true);
         rocketThread.getRocket().setX(tankThread.getTank().getX());
+        rocketThread.getRocket().setTargetX(tankThread.getTank().getX());
         rocketThread.getRocket().setY(tankThread.getTank().getY());
         System.out.println("FIRE rocket X: " + rocketThread.getRocket().getX());
         System.out.println("FIRE rocket button visible: " 

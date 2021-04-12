@@ -12,7 +12,6 @@ public class Rocket extends ElementoDiGioco {
         setX(x);
         setButton(b);
         setTargetY(NewJFrame.ROCKET_YMAX);
-        setTargetX(x);
         setY(NewJFrame.ROCKET_YMIN);
         setStepX(0);
         setStepY(-2);
@@ -41,7 +40,7 @@ public class Rocket extends ElementoDiGioco {
             setStepX(0);
             setStepY(0);
         } else {
-            setTargetX(NewJFrame.ROCKET_YMIN);
+            setTargetY(NewJFrame.ROCKET_YMIN);
         }
     }
 
@@ -49,18 +48,16 @@ public class Rocket extends ElementoDiGioco {
     public void move() {
         //System.out.println("velocita: " + getY());
         
-        if (getY() == NewJFrame.ROCKET_YMAX) {
+        if (getY() <= NewJFrame.ROCKET_YMAX) {
             //setStepX(-getStepX());
             getButton().setVisible(false);
             buttonPressed = false;
              // lo ferma
-            setStepX(0);
-            setStepY(0);
         } else {
             //setTargetY(NewJFrame.ROCKET_YMIN);
             setStepY(-2);
             getButton().setVisible(true);
-            setTargetX(NewJFrame.ROCKET_YMIN);
+            setTargetY(NewJFrame.ROCKET_YMIN);
             setY(getY() + getStepY());
         }
         System.out.println("getY in Rocket.move: " + getY());

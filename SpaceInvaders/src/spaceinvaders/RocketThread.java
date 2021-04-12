@@ -66,7 +66,7 @@ public class RocketThread implements Runnable{
             }
             try {
                 //aspetto 200ms
-                Thread.sleep(2);
+                Thread.sleep(20);
             } catch (InterruptedException ex) {
             }
         }

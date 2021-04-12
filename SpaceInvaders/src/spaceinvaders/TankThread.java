@@ -5,7 +5,6 @@ import javax.swing.JButton;
 public class TankThread implements Runnable{
     
     private final JButton tankButton;
-    private int step;
     private boolean buttonPress = false;
     private Tank tank;
     
@@ -19,14 +18,6 @@ public class TankThread implements Runnable{
 
     public void setButtonPress(boolean buttonPress) {
         this.buttonPress = buttonPress;
-    }
-
-    public int getStep() {
-        return step;
-    }
-
-    public void setStep(int step) {
-        this.step = step;
     }
 
     public Tank getTank() {
@@ -45,14 +36,10 @@ public class TankThread implements Runnable{
         while (true){
             //muovo tank
             tank.move();
-            if (buttonPress == true){
-                tank.setTargetX(tank.getTargetX() + step * NewJFrame.STEP);
-                //System.out.println("valore targetX: " + tank.getTargetX());
-                buttonPress = false;
-            }
+            
             try {
                 //aspetto 200ms
-                Thread.sleep(2);
+                Thread.sleep(20);
             } catch (InterruptedException ex) {
             }
         }
